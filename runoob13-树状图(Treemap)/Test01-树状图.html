@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>树状图</title>
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="highcharts.js"></script>
+    <script src="treemap.js"></script>
+    <script src="heatmap.js"></script>
+
+</head>
+<body>
+
+<div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+<script language="JavaScript">
+    $(document).ready(function() {
+        var title = {
+            text: 'Highcharts Treemap'
+        };
+
+        var colorAxis = {
+            minColor: '#FFFFFF',
+            maxColor: Highcharts.getOptions().colors[0]
+        };
+
+        var series= [{
+            type: "treemap",
+            layoutAlgorithm: 'squarified',
+            data: [{
+                name: 'A',
+                value: 6,
+                colorValue: 1
+            }, {
+                name: 'B',
+                value: 6,
+                colorValue: 2
+            }, {
+                name: 'C',
+                value: 4,
+                colorValue: 3
+            }, {
+                name: 'D',
+                value: 3,
+                colorValue: 4
+            }, {
+                name: 'E',
+                value: 2,
+                colorValue: 5
+            }, {
+                name: 'F',
+                value: 2,
+                colorValue: 6
+            }, {
+                name: 'G',
+                value: 1,
+                colorValue: 7
+            }]
+        }];
+
+        var json = {};
+        json.title = title;
+        json.colorAxis = colorAxis;
+        json.series = series;
+
+        $('#container').highcharts(json);
+    });
+</script>
+
+
+</body>
+</html>

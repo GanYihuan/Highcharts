@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>区间区域图</title>
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="highcharts.js"></script>
+</head>
+<body>
+
+    <div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+    <script language="JavaScript">
+        $(document).ready(function() {
+            var chart = {
+                type: 'arearange',
+                zoomType: 'x'
+            };
+            var title = {
+                text: 'Temperature variation by day'
+            };
+            var xAxis = {
+                type: 'datetime'
+            };
+            var yAxis = {
+                title: {
+                    text: null
+                }
+            };
+            var tooltip = {
+                shared: true,
+                crosshairs: true,
+                valueSuffix: '\xB0C'
+            };
+            var legend = {
+                enabled: false
+            }
+
+            var json = {};
+            json.chart = chart;
+            json.title = title;
+            json.xAxis = xAxis;
+            json.yAxis = yAxis;
+            json.legend = legend;
+
+            $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=range.json&callback=?', function (data) {
+                var series= [{
+                    name: 'Temperatures',
+                    data: data
+                }
+                ];
+                json.series = series;
+                $('#container').highcharts(json);
+            });
+        });
+    </script>
+
+</body>
+</html>

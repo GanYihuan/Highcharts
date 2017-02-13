@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对数图表</title>
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="highcharts.js"></script>
+</head>
+<body>
+    <div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+    <script language="JavaScript">
+        $(document).ready(function() {
+            var title = {
+                text: '对数实例(runoob.com)'
+            };
+            var xAxis = {
+                tickInterval: 1
+            };
+            var yAxis = {
+                type: 'logarithmic',
+                minorTickInterval: 0.1
+            };
+            var tooltip = {
+                headerFormat: '<b>{series.name}</b><br>',
+                pointFormat: 'x = {point.x}, y = {point.y}'
+            };
+            var plotOptions = {
+                spline: {
+                    marker: {
+                        enabled: true
+                    }
+                }
+            };
+            var series= [{
+                name: 'data',
+                data: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512],
+                pointStart: 1
+            }
+            ];
+
+            var json = {};
+            json.title = title;
+            json.tooltip = tooltip;
+            json.xAxis = xAxis;
+            json.yAxis = yAxis;
+            json.series = series;
+            json.plotOptions = plotOptions;
+            $('#container').highcharts(json);
+
+        });
+    </script>
+</body>
+</html>

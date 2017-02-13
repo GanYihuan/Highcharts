@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>反转x轴与y轴</title>
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="highcharts.js"></script>
+</head>
+<body>
+
+    <div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+    <script language="JavaScript">
+        $(document).ready(function() {
+            var chart = {
+                type: 'area',
+                inverted: true
+            };
+            var title = {
+                text: 'Average fruit consumption during one week'
+            };
+            var subtitle = {
+                style: {
+                    position: 'absolute',
+                    right: '0px',
+                    bottom: '10px'
+                }
+            };
+            var legend = {
+                layout: 'vertical',
+                align: 'left',
+                verticalAlign: 'top',
+                x: -150,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+            };
+            var xAxis = {
+                categories: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+            };
+            var yAxis = {
+                title: {
+                    text: 'Number of units'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value;
+                    }
+                },
+                min: 0
+            };
+            var plotOptions = {
+                area: {
+                    fillOpacity: 0.5
+                }
+            };
+            var credits = {
+                enabled: false
+            };
+            var series= [{
+                name: 'John',
+                data: [3, 4, 3, 5, 4, 10, 12]
+            }, {
+                name: 'Jane',
+                data: [1, 3, 4, 3, 3, 5, 4]
+            }
+            ];
+
+            var json = {};
+            json.chart = chart;
+            json.title = title;
+            json.subtitle = subtitle;
+            json.xAxis = xAxis;
+            json.yAxis = yAxis;
+            json.legend = legend;
+            json.plotOptions = plotOptions;
+            json.credits = credits;
+            json.series = series;
+            $('#container').highcharts(json);
+
+        });
+    </script>
+
+</body>
+</html>

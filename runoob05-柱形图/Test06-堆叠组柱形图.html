@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>堆叠组柱形图</title>
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="highcharts.js"></script></head>
+<body>
+
+<div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+<script language="JavaScript">
+    $(document).ready(function() {
+        var chart = {
+            type: 'column'
+        };
+        var title = {
+            text: 'Total fruit consumption, grouped by gender'
+        };
+        var xAxis = {
+            categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+        };
+        var yAxis ={
+            allowDecimals: false,
+            min: 0,
+            title: {
+                text: 'Number of fruits'
+            }
+        };
+        var plotOptions = {
+            column: {
+                stacking: 'normal'
+            }
+        };
+        var credits = {
+            enabled: false
+        };
+        var series= [{
+            name: 'John',
+            data: [5, 3, 4, 7, 2],
+            stack: 'male'
+        }, {
+            name: 'Joe',
+            data: [3, 4, 4, 2, 5],
+            stack: 'male'
+        }, {
+            name: 'Jane',
+            data: [2, 5, 6, 2, 1],
+            stack: 'female'
+        }, {
+            name: 'Janet',
+            data: [3, 0, 4, 4, 3],
+            stack: 'female'
+        }];
+
+        var json = {};
+        json.chart = chart;
+        json.title = title;
+        json.xAxis = xAxis;
+        json.yAxis = yAxis;
+        json.plotOptions = plotOptions;
+        json.credits = credits;
+        json.series = series;
+        $('#container').highcharts(json);
+
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>散点图上添加回归线</title>
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="highcharts.js"></script>
+
+</head>
+<body>
+
+<div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+<script language="JavaScript">
+    $(document).ready(function() {
+        var title = {
+            text: '散点图上添加回归线'
+        };
+        var xAxis = {
+            min: -0.5,
+            max: 5.5
+        };
+        var yAxis= {
+            min: 0
+        };
+        var series= [{
+            type: 'line',
+            name: '回归线',
+            data: [[0, 1.11], [5, 4.51]],
+            marker: {
+                enabled: false
+            },
+            states: {
+                hover: {
+                    lineWidth: 0
+                }
+            },
+            enableMouseTracking: false
+        }, {
+            type: 'scatter',
+            name: '观察点',
+            data: [1, 1.5, 2.8, 3.5, 3.9, 4.2],
+            marker: {
+                radius: 4
+            }
+        }
+        ];
+
+        var json = {};
+        json.title = title;
+        json.xAxis = xAxis;
+        json.yAxis = yAxis;
+        json.series = series;
+        $('#container').highcharts(json);
+    });
+</script>
+
+</body>
+</html>

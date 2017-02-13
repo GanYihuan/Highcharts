@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>通过点击添加数据</title>
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="highcharts.js"></script>
+
+</head>
+<body>
+
+<div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+<script language="JavaScript">
+    $(document).ready(function() {
+        var chart = {
+            type: 'scatter',
+            margin: [70, 50, 60, 80],
+            events: {
+                click: function (e) {
+                    // find the clicked values and the series
+                    var x = e.xAxis[0].value,
+                            y = e.yAxis[0].value,
+                            series = this.series[0];
+                    // Add it
+                    series.addPoint([x, y]);
+                }
+            }
+        };
+        var title = {
+            text: 'User supplied data'
+        };
+        var subtitle = {
+            text: 'Click the plot area to add a point. Click a point to remove it.'
+        };
+        var xAxis = {
+            gridLineWidth: 1,
+            minPadding: 0.2,
+            maxPadding: 0.2,
+            maxZoom: 60
+        };
+        var yAxis = {
+            title: {
+                text: 'Value'
+            },
+            minPadding: 0.2,
+            maxPadding: 0.2,
+            maxZoom: 60,
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        };
+        var legend = {
+            enabled: false
+        };
+        var exporting = {
+            enabled: false
+        };
+        var plotOptions = {
+            series: {
+                lineWidth: 1,
+                point: {
+                    events: {
+                        'click': function () {
+                            if (this.series.data.length > 1) {
+                                this.remove();
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        var series= [{
+            data: [[20, 20], [80, 80]]
+        }];
+
+        var json = {};
+        json.chart = chart;
+        json.title = title;
+        json.subtitle = subtitle;
+        json.xAxis = xAxis;
+        json.yAxis = yAxis;
+        json.legend = legend;
+        json.exporting = exporting;
+        json.series = series;
+        json.plotOptions = plotOptions;
+        $('#container').highcharts(json);
+
+    });
+</script>
+
+</body>
+</html>

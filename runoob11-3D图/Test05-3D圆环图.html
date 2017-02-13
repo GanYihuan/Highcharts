@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3D圆环图</title>
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="highcharts.js"></script>
+    <script src="highcharts-3d.js"></script>
+
+</head>
+<body>
+
+<div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+<script language="JavaScript">
+    $(document).ready(function() {
+        var chart = {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45
+            }
+        };
+        var title = {
+            text: '每周水果配送量'
+        };
+        var subtitle = {
+            text: 'Highcharts 3D圆环图'
+        };
+
+        var plotOptions = {
+            pie: {
+                innerSize: 100,
+                depth: 45
+            }
+        };
+        var series= [{
+            name: '配送量',
+            data: [
+                ['Bananas', 8],
+                ['Kiwi', 3],
+                ['Mixed nuts', 1],
+                ['Oranges', 6],
+                ['Apples', 8],
+                ['Pears', 4],
+                ['Clementines', 4],
+                ['Reddish (bag)', 1],
+                ['Grapes (bunch)', 1]
+            ]
+        }];
+
+        var json = {};
+        json.chart = chart;
+        json.title = title;
+        json.subtitle = subtitle;
+        json.plotOptions = plotOptions;
+        json.series = series;
+        $('#container').highcharts(json);
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用负数区域图</title>
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="highcharts.js"></script>
+</head>
+<body>
+
+    <div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+    <script language="JavaScript">
+        $(document).ready(function() {
+            var chart = {
+                type: 'area'
+            };
+            var title = {
+                text: 'Area chart with negative values'
+            };
+            var xAxis = {
+                categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+            };
+            var credits = {
+                enabled: false
+            };
+            var series= [{
+                name: 'John',
+                data: [5, 3, 4, 7, 2]
+            }, {
+                name: 'Jane',
+                data: [2, -2, -3, 2, 1]
+            }, {
+                name: 'Joe',
+                data: [3, 4, 4, -2, 5]
+            }
+            ];
+
+            var json = {};
+            json.chart = chart;
+            json.title = title;
+            json.xAxis = xAxis;
+            json.credits = credits;
+            json.series = series;
+            $('#container').highcharts(json);
+
+        });
+    </script>
+
+</body>
+</html>

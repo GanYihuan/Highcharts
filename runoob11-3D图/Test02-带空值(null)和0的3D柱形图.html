@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>带空值(null)和0的3D柱形图</title>
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="highcharts.js"></script>
+    <script src="highcharts-3d.js"></script>
+
+</head>
+<body>
+
+<div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+<script language="JavaScript">
+    $(document).ready(function() {
+        var chart = {
+            type: 'column',
+            margin: 75,
+            options3d: {
+                enabled: true,
+                alpha: 10,
+                beta: 25,
+                depth: 70
+            }
+        };
+        var title = {
+            text: '带空值的 3D 图'
+        };
+        var subtitle = {
+            text: '注意 0 和 null 的区别'
+        };
+        var xAxis = {
+            categories: Highcharts.getOptions().lang.shortMonths
+        };
+        var yAxis = {
+            title: {
+                text: null
+            }
+        };
+        var series= [{
+            name: 'Sales',
+            data: [2, 3, null, 4, 0, 5, 1, 4, 6, 3]
+        }];
+
+        var json = {};
+        json.chart = chart;
+        json.title = title;
+        json.subtitle = subtitle;
+        json.xAxis = xAxis;
+        json.yAxis = yAxis;
+        json.series = series;
+        $('#container').highcharts(json);
+    });
+</script>
+
+</body>
+</html>

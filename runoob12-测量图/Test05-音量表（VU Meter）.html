@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>音量表（VU Meter）</title>
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="highcharts.js"></script>
+    <script src="highcharts-more.js"></script>
+</head>
+<body>
+
+<div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+<script language="JavaScript">
+    $(document).ready(function() {
+        var chart = {
+            type: 'gauge',
+            plotBorderWidth: 1,
+            plotBackgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                    [0, '#FFF4C6'],
+                    [0.3, '#FFFFFF'],
+                    [1, '#FFF4C6']
+                ]
+            },
+            plotBackgroundImage: null,
+            height: 200
+        };
+        var credits = {
+            enabled: false
+        };
+
+        var title = {
+            text: '音量表（VU Meter）'
+        };
+
+        var pane = [{
+            startAngle: -45,
+            endAngle: 45,
+            background: null,
+            center: ['25%', '145%'],
+            size: 300
+        }, {
+            startAngle: -45,
+            endAngle: 45,
+            background: null,
+            center: ['75%', '145%'],
+            size: 300
+        }];
+
+        var yAxis = [{
+            min: -20,
+            max: 6,
+            minorTickPosition: 'outside',
+            tickPosition: 'outside',
+            labels: {
+                rotation: 'auto',
+                distance: 20
+            },
+            plotBands: [{
+                from: 0,
+                to: 6,
+                color: '#C02316',
+                innerRadius: '100%',
+                outerRadius: '105%'
+            }],
+            pane: 0,
+            title: {
+                text: 'VU<br/><span style="font-size:8px">Channel A</span>',
+                y: -40
+            }
+        }, {
+            min: -20,
+            max: 6,
+            minorTickPosition: 'outside',
+            tickPosition: 'outside',
+            labels: {
+                rotation: 'auto',
+                distance: 20
+            },
+            plotBands: [{
+                from: 0,
+                to: 6,
+                color: '#C02316',
+                innerRadius: '100%',
+                outerRadius: '105%'
+            }],
+            pane: 1,
+            title: {
+                text: 'VU<br/><span style="font-size:8px">Channel B</span>',
+                y: -40
+            }
+        }];
+
+        var plotOptions = {
+            gauge: {
+                dataLabels: {
+                    enabled: false
+                },
+                dial: {
+                    radius: '100%'
+                }
+            }
+        };
+        var series= [{
+            data: [-20],
+            yAxis: 0
+        }, {
+            data: [-20],
+            yAxis: 1
+        }];
+
+        var json = {};
+        json.chart = chart;
+        json.credits = credits;
+        json.title = title;
+        json.pane = pane;
+        json.yAxis = yAxis;
+        json.plotOptions = plotOptions;
+        json.series = series;
+
+        // Add some life
+        var chartFunction = function (chart) {
+            setInterval(function () {
+                if (chart.series) { // the chart may be destroyed
+                    var left = chart.series[0].points[0],
+                            right = chart.series[1].points[0],
+                            leftVal,
+                            rightVal,
+                            inc = (Math.random() - 0.5) * 3;
+
+                    leftVal =  left.y + inc;
+                    rightVal = leftVal + inc / 3;
+                    if (leftVal < -20 || leftVal > 6) {
+                        leftVal = left.y - inc;
+                    }
+                    if (rightVal < -20 || rightVal > 6) {
+                        rightVal = leftVal;
+                    }
+
+                    left.update(leftVal, false);
+                    right.update(rightVal, false);
+                    chart.redraw();
+                }
+            }, 500);
+        };
+
+        $('#container').highcharts(json, chartFunction);
+    });
+</script>
+
+</body>
+</html>
